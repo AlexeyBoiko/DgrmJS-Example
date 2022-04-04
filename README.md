@@ -1,5 +1,5 @@
 # DgrmJS Example
-This is a minimalistic example of using the DermIS library.
+This is a minimalistic example of using the DgrmIS library.
 
 DgrmJS is a JavaScript library for creating SVG diagram editors.   
 [DgrmJS GitHub](https://github.com/AlexeyBoiko/DgrmJS).
