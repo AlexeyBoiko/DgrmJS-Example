@@ -5,6 +5,9 @@ DgrmJS is a JavaScript library for creating SVG diagram editors.
 [DgrmJS GitHub](https://github.com/AlexeyBoiko/DgrmJS).
 
 ## This example shows, how to
+
+<img src="https://raw.githubusercontent.com/AlexeyBoiko/DgrmJS-Example/doc/img/dgrm-js-example.PNG" alt="diagram" width="600"/>
+
 - Install DgrmJS library from npm.
 - Create a shape with one In-Connector and one Out-Connector.
 - Add shapes to diagram, update shape, delete shape from diagram.
