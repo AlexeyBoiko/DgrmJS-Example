@@ -1,0 +1,25 @@
+{
+  "name": "dgrmjs-example",
+  "version": "1.0.0",
+  "description": "dgrmjs usage example",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexeyBoiko/DgrmJS-Example.git"
+  },
+  "author": "Alexey Boyko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexeyBoiko/DgrmJS-Example/issues"
+  },
+  "homepage": "https://github.com/AlexeyBoiko/DgrmJS-Example#readme",
+  "dependencies": {
+    "dgrm": "0.0.2"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

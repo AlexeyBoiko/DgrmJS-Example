@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="data:,">
+	<style>
+		html, body, #diagram {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			user-select: none;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Liberation Sans", sans-serif;
+			color: rgb(73, 80, 87);
+		}
+
+		a {
+			color: #0d6efd;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="links" style="position: fixed; bottom: 0; right: 0; padding: 15px; color: #0d6efd;">
+		<a href="https://github.com/AlexeyBoiko/DgrmJS" target="_blank">GitHub</a> | <a href="https://linkedin.com/in/alexey-boyko-tech" target="_blank">LinkedIn</a>
+	</div>
+	<svg id="diagram" xmlns="http://www.w3.org/2000/svg" style="touch-action: none; background-color: #fff; display:block;">
+		<style type="text/css">
+			[data-connect="in"],
+			[data-connect="out"] {
+				opacity: 0.51;
+				stroke: rgb(108 187 247);
+				fill: rgb(108 187 247);
+			}
+
+			[data-connect="in"].hover circle {
+				stroke-width: 25px;
+			}
+
+			[data-templ] use {
+				fill: transparent;
+			}
+
+			[data-templ].selected use
+			{
+				fill: rgb(108 187 247 / 51%);
+			}
+
+			[data-templ] [data-connect] {
+				display: none;
+			}
+
+			[data-connect="in"].connected {
+				display: unset;
+			}
+
+			[data-templ].selected [data-connect="out"] {
+				display: unset;
+			}
+
+			[data-templ].selected [data-connect="in"] {
+				display: none;
+			}
+
+			[data-templ].hover [data-connect="in"] {
+				display: unset;
+			}
+
+			[data-templ].hover [data-connect="in"] .empty {
+				display: unset;
+			}
+
+			[data-templ].hover [data-connect="in"] .not-empty {
+				display: none;
+			}
+
+			[data-connect="in"] .not-empty {
+				display: none;
+			}
+
+			[data-connect="in"].connected .not-empty {
+				display: unset;
+			}
+
+			[data-connect="in"].connected .empty {
+				display: none;
+			}
+
+			@media (pointer: coarse) {
+				[data-connect] {
+					stroke-width: 15px;
+				}
+
+				[data-connect="in"].hover circle {
+					stroke-width: 55px;
+				}
+			}
+			
+		</style>
+		<defs>
+			<g id="arrow">
+				<circle r="13" stroke-width="0" />
+				<path d="M-7 7 l 7 -7 l -7 -7" stroke="#333" stroke-width="1.8" fill="none"
+					style="pointer-events: none;"></path>
+			</g>
+
+			<path data-templ="path" d="M0 0" stroke="#333" stroke-width="1.8" fill="none" style="pointer-events: none;">
+			</path>
+
+			<g data-templ="connect-end" data-connect="in" data-connect-point="0,0" data-connectable="true">
+				<circle style="pointer-events: none;" r="24" fill="transparent" stroke="transparent" stroke-width="1" />
+				<use xlink:href="#arrow" />
+			</g>
+
+			<g data-templ="circle" data-center="0,0">
+				<circle data-no-click="" r="80" fill="transparent" stroke="transparent" stroke-width="1" />
+				<circle data-key="circle" r="60" fill="#ff6600" stroke="#fff" stroke-width="1" />
+				
+				<text data-key="text" data-line-height="20" text-anchor="middle" alignment-baseline="central" fill="#fff"></text>
+
+				<circle data-key="outright" data-connect="out" data-connect-point="60,0" data-connect-dir="right" r="10"
+					cx="60" cy="0">
+				</circle>
+
+				<g data-key="inleft" data-connect="in" data-connect-point="-60,0" data-connect-dir="left">
+					<circle class="empty" r="10" cx="-60" cy="0"></circle>
+					<use class="not-empty" xlink:href="#arrow" transform="translate(-60)" />
+				</g>
+			</g>
+		</defs>
+		<g data-key="canvas"></g>
+	</svg>
+	<script type="module">
+		// Do not include scripts directly from 'node_modules' in real projects.
+		// Use build tools, like rollup, webpack, etc
+		import { svgDiagramCreate } from './node_modules/dgrm/index.js';
+	
+		// create diagram, and subscribe to events
+		const diagram = svgDiagramCreate(document.getElementById('diagram'))
+			.on('select', evt => {
+				if (evt.detail.target === shape1) {
+					// update shape
+					shape1.update({
+						props: {
+							circle: { fill: '#ff6600' }
+						}
+					});
+				} else if (evt.detail.target === shape2) {
+					// delete shape
+					diagram.shapeDel(shape2);
+				} else { console.log('canvas selected'); }
+			})
+			.on('connect', evt => console.log(evt))
+			.on('disconnect', evt => console.log(evt));
+
+		// add shape
+		const shape1 = diagram.shapeAdd({
+			// template name
+			// (value of the 'data-templ' attribute)
+			templateKey: 'circle',
+			position: { x: 120, y: 120 },
+			props: {
+				// inner svg element with 'data-key=circle'
+				// will get 'fill' attribute with value '#344767'
+				circle: { fill: '#344767' },
+
+				// inner svg element with 'data-key=text'
+				// will get 'textContent' value 'Title'
+				text: { textContent: 'Click to color' }
+			}
+		});
+
+		// add second shape
+		const shape2 = diagram.shapeAdd({
+			templateKey: 'circle',
+			position: { x: 320, y: 320 },
+			props: {
+				text: { textContent: 'Click to del' }
+			}
+		});
+
+		// connect shapes
+		diagram.shapeConnect({
+			start: { shape: shape1, connector: 'outright' },
+			end: { shape: shape2, connector: 'inleft' }
+		});
+	</script>
+</body>
+
+</html>
