@@ -51,7 +51,7 @@ Add 'start' script to the package.json:
 },
 ```
 
-Add [index.html](https://github.com/AlexeyBoiko/DgrmJS-Example/blob/main/index.html) file to the project diractory.
+Add [index.html](https://github.com/AlexeyBoiko/DgrmJS-Example/blob/main/index.html) file to the project directory.
 
 Run:
 ```
