@@ -39,7 +39,7 @@ Install DgrmJs library from npm:
 npm i dgrm
 ```
 
-This exmaple uses [Live Server](https://www.npmjs.com/package/live-server) as development http server.  
+This example uses [Live Server](https://www.npmjs.com/package/live-server) as development http server.  
 Install 'Live Server':
 ```
 npm install --save-dev live-server
