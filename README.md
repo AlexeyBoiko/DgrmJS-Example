@@ -1,8 +1,10 @@
 # DgrmJS Example
-This is a minimalistic example of using the DgrmJS library.
+This is a minimalistic example of using the DgrmJS library.  
+[View example on-line](https://alexeyboiko.github.io/DgrmJS-Example/).
 
 DgrmJS is a JavaScript library for creating SVG diagram editors.   
 [DgrmJS GitHub](https://github.com/AlexeyBoiko/DgrmJS).
+
 
 ## This example shows, how to
 
